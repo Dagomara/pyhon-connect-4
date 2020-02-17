@@ -63,7 +63,6 @@ players have a number value for putting into the board array,
 have a symbol of choice to be put into the ascii array,
 have a score counter for amount of won games,
 and can see final board layouts of both won and lost games.
-
 That's because the game object has a board and takes player objects as input,
 runs a game inside of it, and finally returns a copy of the board
 to the players involved in that game.
@@ -101,13 +100,18 @@ def checkForWinner(boardInQuestion):
                 winner = boardInQuestion[row][cell]
                 break
         #check each column vertically
-    for i in range(len(boardInQuestion[0])-1):
+    for i in range(len(boardInQuestion[0])):
         for row in range(len(boardInQuestion)-3):
             if( (boardInQuestion[row][i]!=0)and(boardInQuestion[row][i]==boardInQuestion[row+1][i])and(boardInQuestion[row][i]==boardInQuestion[row+2][i])and(boardInQuestion[row][i]==boardInQuestion[row+3][i]) ):
                 print("VERTICAL MATCH ON ROW=" + str(row) + " CELL=" + str(cell))
                 winner = boardInQuestion[row][i]
                 break
         #check every possible southeast diagnal, top-down left to right
+    for row in range(len(boardInQuestion)-4):
+      for column in range(len(boardInQuestion[row])-3):
+        #print(boardInQuestion[row][column])
+        if (  (boardInQuestion[row][column]!=0)and(boardInQuestion[row][i]==boardInQuestion[row+1][i+1])  ):
+          print("ROW=",row,"and COLUMN=",column,"has a diagonal") 
         #check every possible northeast diagonal, bottom-up left to right
     #except Exception:
         #print(Exception)
@@ -208,6 +212,7 @@ $PLAYER_ID...
 
 #test game goings on
 game1 = Game(p1,p2,[6,7])
+showBoardNums(game1.board)
 #game1.bugfix()
 #print(game1.playerSpace)
 game1.play()
@@ -240,7 +245,6 @@ while(winner=="none"):
     if (checkForWinner(square)!=0):
         winner = checkForWinner(square)
         break
-
 print("Congratulations player " + str(winner) + ", you WIN!! ")
 """
 
@@ -283,6 +287,4 @@ TO-DO:
         devconsole?!
 BACKBURNER:
     tkinter ;;;)))
-
-
 """
